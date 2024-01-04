@@ -4,6 +4,8 @@ import {sanityClient, urlFor} from '../sanity'
 import {Collection} from '../typings'
 import Link from "next/link"
 
+import Image from 'next/image'
+
 interface Props{
   collections: Collection[]
 }
@@ -25,9 +27,9 @@ const Home = ({collections}: Props) =>{
       <main className="bg-slate-100 p-10 shadow-xl shadow-rose-400">
         <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {collections.map(collection => (
-<Link href={`/nft/${collection.slug.current}`}>
+<Link href={`/nft/${collection.slug.current}`} key={collection._id}>
             <div className="flex cursor-pointer flex-col items-center transition-all duration-200 hover:scale-105">
-              <img className="h-96 w-60 rounded-2xl object-cover" src={urlFor(collection.mainImage).url()} alt="" />
+              <Image className="h-96 w-60 rounded-2xl object-cover" src={urlFor(collection.mainImage).url()} alt="" />
               <div className="p-5">
                 <h2 className="text-3xl">{collection.title}</h2>
                 <p className="mt-2 text-sm text-gray-400">{collection.description}</p>
